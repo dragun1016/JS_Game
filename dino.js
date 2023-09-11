@@ -35,10 +35,19 @@ class Dino {
   }
 
   Draw() {
-    ctx.beginPath();
-    ctx.fillStyle = this.c;
-    ctx.fillRect(this.x, this.y, this.w, this.h);
-    ctx.closePath();
+    // ctx.beginPath();
+    // ctx.fillStyle = this.c;
+    // ctx.fillRect(this.x, this.y, this.w, this.h);
+    // ctx.closePath();
+
+    var img = new Image();
+    if ((keys["ShiftLeft"] || keys["KeyS"]) && this.grounded) {
+      img.src = "./Images/dino_down.png";
+      ctx.drawImage(img, this.x, this.y, this.w, this.h);
+    } else {
+      img.src = "./Images/dino_up.png";
+      ctx.drawImage(img, this.x, this.y, this.w, this.h);
+    }
   }
 
   Jump() {
@@ -59,9 +68,9 @@ class Dino {
       this.jumpTimer = 0;
     }
 
-    if (keys["ShiftLeft"] || keys["KeyS"]) {
-      this.h = this.originalHeight / 2;
-      this.y = this.y + 25;
+    if ((keys["ShiftLeft"] || keys["KeyS"]) && this.grounded) {
+      this.y += this.h / 2;
+      this.h = this.originalHeight; // / 2;
     } else {
       this.h = this.originalHeight;
     }
@@ -83,6 +92,92 @@ class Dino {
   }
 }
 
+class Obstacle {
+  constructor(x, y, w, h, c) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.c = c;
+
+    this.dx = -gameSpeed;
+    this.isBird = false;
+  }
+
+  Update() {
+    this.x += this.dx;
+    this.Draw();
+    this.dx = -gameSpeed;
+  }
+
+  Draw() {
+    // ctx.beginPath();
+    // ctx.fillStyle = this.c;
+    // ctx.fillRect(this.x, this.y, this.w, this.h);
+    // ctx.closePath;
+
+    var img = new Image();
+    if (this.isBird == true) {
+      img.src = "./Images/bird.png";
+      ctx.drawImage(img, this.x, this.y, this.w, this.h);
+    } else {
+      img.src = "./Images/catus.png";
+      ctx.drawImage(img, this.x, this.y, this.w, this.h);
+    }
+  }
+}
+
+class Text {
+  constructor(t, x, y, a, c, s) {
+    this.t = t;
+    this.x = x;
+    this.y = y;
+    this.a = a;
+    this.c = c;
+    this.s = s;
+  }
+
+  Draw() {
+    ctx.beginPath();
+    ctx.fillStyle = this.c;
+    ctx.font = this.s + "px sans-serif";
+    ctx.TextAlign = this.a;
+    ctx.fillText(this.t, this.x, this.y);
+    ctx.closePath();
+  }
+}
+
+function init() {
+  obstacles = [];
+  score = 0;
+  spawnTimer = initialSpawnTimer;
+  gameSpeed = 3;
+
+  window.localStorage.setItem("highscore", highscore);
+}
+
+function SpawnObstacle() {
+  let size = RandomIntInRange(20, 70);
+  let type = RandomIntInRange(0, 1);
+  let obstacle = new Obstacle(
+    canvas.width + size,
+    canvas.height - size,
+    size,
+    size,
+    "#2484E4"
+  );
+
+  if (type == 1) {
+    obstacle.y -= dino.originalHeight - 10;
+    obstacle.isBird = true;
+  }
+  obstacles.push(obstacle);
+}
+
+function RandomIntInRange(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+
 function Start() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -92,17 +187,81 @@ function Start() {
   gameSpeed = 3;
   gravity = 1;
 
-  Score = 0;
-  highScore = 0;
+  score = 0;
+  highscore = 0;
+
+  if (localStorage.getItem("highscore")) {
+    highscore = localStorage.getItem("highscore");
+  }
 
   dino = new Dino(25, canvas.height - 150, 50, 50, "pink");
+
+  scoreText = new Text("Score: " + score, 25, 25, "left", "#212121", "20");
+
+  highscoreText = new Text(
+    "HighScore: " + highscore,
+    canvas.width - 150,
+    25,
+    "right",
+    "#212121",
+    "20"
+  );
   //   dino.Draw();
   requestAnimationFrame(Update);
 }
+
+let initialSpawnTimer = 200;
+let spawnTimer = initialSpawnTimer;
+
 function Update() {
   requestAnimationFrame(Update);
   //   dino.Animate();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   dino.Animate();
+
+  spawnTimer--;
+  if (spawnTimer <= 0) {
+    SpawnObstacle();
+    console.log(obstacles);
+    spawnTimer = initialSpawnTimer - gameSpeed * 8;
+
+    if (spawnTimer < 60) {
+      spawnTimer = 60;
+    }
+  }
+
+  // 장애물 생성
+
+  for (let i = 0; i < obstacles.length; i++) {
+    let o = obstacles[i];
+
+    if (o.x + o.w < 0) {
+      obstacles.splice(i, 1);
+    }
+
+    if (
+      dino.x < o.x + o.w &&
+      dino.x + dino.w > o.x &&
+      dino.y < o.y + o.h &&
+      dino.y + dino.h > o.y
+    ) {
+      init();
+    }
+
+    o.Update();
+  }
+  score++;
+  scoreText.t = "Score: " + score;
+  scoreText.Draw();
+
+  if (score > highscore) {
+    highscore = score;
+    highscoreText.t = "Highscore: " + highscore;
+  }
+
+  highscoreText.Draw();
+
+  gameSpeed += 0.003;
 }
+
 Start();
