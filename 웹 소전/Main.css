@@ -1,0 +1,21 @@
+img {
+    width: 200px;
+    height: 250px;
+}
+
+#main {
+    display: flex;
+    overflow-x: auto;
+}
+
+#main > div {
+    margin-right: 50px;
+}
+
+#gameStartButton {
+    display: block;
+    margin: 50px auto;
+    width: 100px;
+    height: 75px;
+    border-radius: 15px;
+}
