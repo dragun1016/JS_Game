@@ -157,6 +157,35 @@ function init() {
 
   localStorage.setItem("sToM", parseInt(lastMoney) + parseInt((score * 300)));
 
+  if(localStorage.getItem('btcC')){
+    let btcCoinC = localStorage.getItem('btcC');
+    localStorage.setItem("btcCo", parseInt(btcCoinC));
+   }
+   if(localStorage.getItem('lskC')){
+    let lskCoinC = localStorage.getItem('lskC');
+    localStorage.setItem("lskCo", parseInt(lskCoinC));
+   }
+   if(localStorage.getItem('mtlC')){
+    let mtlCoinC = localStorage.getItem('mtlC');
+    localStorage.setItem("mtlCo", parseInt(mtlCoinC));
+   }
+   if(localStorage.getItem('ethC')){
+    let ethCoinC = localStorage.getItem('ethC');
+    localStorage.setItem("ethCo", parseInt(ethCoinC));
+   }
+   if(localStorage.getItem('neoC')){
+    let neoCoinC = localStorage.getItem('neoC');
+    localStorage.setItem("neoCo", parseInt(neoCoinC));
+   }
+   if(localStorage.getItem('qtumC')){
+    let qtumCoinC = localStorage.getItem('qtumC');
+    localStorage.setItem("qtumCo", parseInt(qtumCoinC));
+   }
+   if(localStorage.getItem('xrpC')){
+    let xrpCoinC = localStorage.getItem('xrpC');
+    localStorage.setItem("xrpCo", parseInt(xrpCoinC));
+   }
+//.....
   score = 0;
   spawnTimer = initialSpawnTimer;
   gameSpeed = 3;

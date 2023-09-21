@@ -64,6 +64,8 @@ setInterval(function() {
 
     document.getElementById("nowBtc").innerHTML = `현재 가격 : ${btcPrice}`;
     document.getElementById("btcCoin").innerHTML = `현재 보유량 : ${btcCoinC}`;
+
+    //...
 }, 1);
 
 function buyButtonB() {
@@ -75,6 +77,7 @@ function buyButtonB() {
         console.log
         money = initialMoney;
         xrpCoinC = 0;
+
         location.href = link;
     }
 }
@@ -204,6 +207,13 @@ function sellButtonM() {
 function gameStart() {
     localStorage.setItem("moneys", money);
     location.href = gamelink;
+    localStorage.setItem("btcC", parseInt(btcCoinC));
+    localStorage.setItem("ethC", parseInt(ethCoinC));
+    localStorage.setItem("neoC", parseInt(neoCoinC));
+    localStorage.setItem("qtumC", parseInt(qtumCoinC));
+    localStorage.setItem("lskC", parseInt(lskCoinC));
+    localStorage.setItem("mtlC", parseInt(mtlCoinC));
+    localStorage.setItem("xrpC", parseInt(xrpCoinC));
 }
 
 if(localStorage.getItem('sToM')){
@@ -211,7 +221,35 @@ if(localStorage.getItem('sToM')){
     money = parseInt(a);
    }
 
+if(localStorage.getItem('btcCo')){
+    btcCoinC = localStorage.getItem('btcCo');
+}
+if(localStorage.getItem('lskCo')){
+    lskCoinC = localStorage.getItem('lskCo');
+}
+if(localStorage.getItem('mtlCo')){
+    mtlCoinC = localStorage.getItem('mtlCo');
+}
+if(localStorage.getItem('qtumCo')){
+    qtumCoinC = localStorage.getItem('qtumCo');
+}
+if(localStorage.getItem('neoCo')){
+    neoCoinC = localStorage.getItem('neoCo');
+}
+if(localStorage.getItem('xrpCo')){
+    xrpCoinC = localStorage.getItem('xrpCo');
+}
+if(localStorage.getItem('ethCo')){
+    ethCoinC = localStorage.getItem('ethCo');
+}
 
 function reset() {
     money = 1000000000
+    btcCoinC = 0;
+    xrpCoinC = 0;
+    lskCoinC = 0;
+    mtlCoinC = 0;
+    qtumCoinC = 0;
+    neoCoinC = 0;
+    ethCoinC = 0;
 }

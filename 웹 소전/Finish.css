@@ -6,3 +6,8 @@ body {
     margin: 0;
     font-size: 150px;
 }
+button {
+    width: 150px;
+    height: 200px;
+    border-radius: 15px;
+}
