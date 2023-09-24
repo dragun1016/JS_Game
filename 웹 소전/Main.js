@@ -252,4 +252,6 @@ function reset() {
     qtumCoinC = 0;
     neoCoinC = 0;
     ethCoinC = 0;
+
+    localStorage.clear();
 }

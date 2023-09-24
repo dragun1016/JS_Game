@@ -8,69 +8,82 @@
     <link rel="stylesheet" href="Main.css">
 </head>
 <body>
-    <h1 id="nowMoney">...</h1>
-
+    <div id="topBar">
+        <h1 id="nowMoney">...</h1>
+        <button onclick="reset()" id="resetB">청산</button>
+    </div>
     <div id="main">
         <div id="braveC">
             <img src="./Images/braveCookie.webp" alt="용감한 쿠키">
             <p id="nowXrp"></p>
             <p id="xrpCoin"></p>
-            <button onclick="buyButtonB()">구매하기</button>
-            <button onclick="sellButtonB()">판매하기</button>
+            <div class="buttons">
+                <button onclick="buyButtonB()" class="buy">매수</button>
+                <button onclick="sellButtonB()" class="sell">매도</button>
+            </div>
         </div>
         <!-- ... -->
         <div id="gayC">
             <img src="./Images/gayCookie.webp" alt="명량한 쿠키">
             <p id="nowLsk"></p>
             <p id="lskCoin"></p>
-            <button onclick="buyButtonG()">구매하기</button>
-            <button onclick="sellButtonG()">판매하기</button>
+            <div class="buttons">
+                <button onclick="buyButtonG()" class="buy">매수</button>
+                <button onclick="sellButtonG()" class="sell">매도</button>
+            </div>
         </div>
         <!-- ... -->
         <div id="ninjaC">
             <img src="./Images/ninjaCookie.webp" alt="닌자맛 쿠키">
             <p id="nowMtl"></p>
             <p id="mtlCoin"></p>
-            <button onclick="buyButtonN()">구매하기</button>
-            <button onclick="sellButtonN()">판매하기</button>
+            <div class="buttons">
+                <button onclick="buyButtonN()" class="buy">매수</button>
+                <button onclick="sellButtonN()" class="sell">매도</button>
+            </div>
         </div>
         <!-- ... -->
         <div id="chillyC">
             <img src="./Images/chillyCookie.webp" alt="칠리맛 쿠키">
             <p id="nowQtum"></p>
             <p id="qtumCoin"></p>
-            <button onclick="buyButtonC()">구매하기</button>
-            <button onclick="sellButtonC()">판매하기</button>
+            <div class="buttons">
+                <button onclick="buyButtonC()" class="buy">매수</button>
+                <button onclick="sellButtonC()" class="sell">매도</button>
+            </div>
         </div>
         <!-- ... -->
         <div id="vampireC">
             <img src="./Images/vampireCookie.webp" alt="뱀파이어맛 쿠키">
             <p id="nowNeo"></p>
             <p id="neoCoin"></p>
-            <button onclick="buyButtonV()">구매하기</button>
-            <button onclick="sellButtonV()">판매하기</button>
+            <div class="buttons">
+                <button onclick="buyButtonV()" class="buy">매수</button>
+                <button onclick="sellButtonV()" class="sell">매도</button>
+            </div>
         </div>
         <!-- ... -->
         <div id="fireC">
             <img src="./Images/fireCookie.webp" alt="불꽃정령 쿠키">
             <p id="nowEth"></p>
             <p id="ethCoin"></p>
-            <button onclick="buyButtonF()">구매하기</button>
-            <button onclick="sellButtonF()">판매하기</button>
+            <div class="buttons">
+                <button onclick="buyButtonF()" class="buy">매수</button>
+                <button onclick="sellButtonF()" class="sell">매도</button>
+            </div>
         </div>
         <!-- ... -->
         <div id="moonC">
             <img src="./Images/moonCookie.webp" alt="달빛술사 쿠키">
             <p id="nowBtc"></p>
             <p id="btcCoin"></p>
-            <button onclick="buyButtonM()">구매하기</button>
-            <button onclick="sellButtonM()">판매하기</button>
+            <div class="buttons">
+                <button onclick="buyButtonM()" class="buy">매수</button>
+                <button onclick="sellButtonM()" class="sell">매도</button>
+            </div>
         </div>
     </div>
-
-    <button id="gameStartButton" onclick="gameStart()">돈 벌러 가기</button>
-
-    <button onclick="reset()" id="resetB">reset</button>
+    <button id="gameStartButton" onclick="gameStart()"></button>
 </body>
 <script src="Main.js"></script>
 </html>
